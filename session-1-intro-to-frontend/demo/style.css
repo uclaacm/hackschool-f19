@@ -1,0 +1,16 @@
+@keyframes fire {
+	0% {color: red; transform: translate(100px, 0px);}
+	50% {color: yellow; transform: translate(0px, 0px);}
+	100% {color: red; transform: translate(100px, 0px);}
+}
+
+.noot {
+	color: green;
+	font-family: 'Beth Ellen', cursive;
+}
+
+#last {
+	color: green;
+	animation: fire 4s ease infinite;
+}
+
