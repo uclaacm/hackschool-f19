@@ -1,4 +1,4 @@
-# HackSchool Session 1: Introduction to Web Development
+# Hackschool Session 1: Introduction to Web Development
 **Location**: Covel 227
 **Time**: 6-8pm
 
@@ -53,7 +53,8 @@ How does your laptop know which server to ask for the webpage from? All computer
 
 <img src="images/hiidlike.png" height="300">
 <img src="images/yanoprobs.png" height="300">
-*These not actually the words computers use to communicate. The words that computers actually use to communicate is called a "protocol," and the protocol that web browsers and servers use to communicate is called HTTP or [HyperText Transfer Protocol](https://www.lifewire.com/hypertext-transfer-protocol-817944)*  
+
+> These not actually the words computers use to communicate. The words that computers actually use to communicate is called a "protocol," and the protocol that web browsers and servers use to communicate is called HTTP or [HyperText Transfer Protocol](https://www.lifewire.com/hypertext-transfer-protocol-817944).
   
 After all of this, you can view the web page on your computer through a browser like Google Chrome.  
 
