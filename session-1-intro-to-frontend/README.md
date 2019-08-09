@@ -221,8 +221,6 @@ img {
 
 <img src="images/borderradius.png" height="400">
 
-Your website should now look like this:
-
 
 ### **About Selection**: Class and ID
 All HTML tags have the attribute `class` and `id`. These 2 attributes can be used by CSS code to target the element to add style to. For example, let's say we only want to change the styles on the last three headings. We can specify a class named `noot` for these three headings like this in `index.html`:
