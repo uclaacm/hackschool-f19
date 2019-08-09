@@ -184,15 +184,45 @@ Add the following code:
 
 ## CSS
 
-HTML should only represent the content. A different language called CSS (Cascading Style Sheet) is used to create rules about *style*. With CSS, you can create rules like "This text should be red." or "There should be 20 pixels between these two elements." or "This navigation bar should stick to the top of the screen."
+HTML should only represent the content. A different language called CSS (Cascading Style Sheet) is used to create rules about *style*. With CSS, you can create rules like "This text should be red." or "There should be 20 pixels between these two elements." or "This navigation bar should stick to the top of the screen." Let's take a look at the syntax:
+```css
+body: {
+  color: red;
+}
+```
+`body` is the **selector** is what tag you're referring to in the HTML. 
+`color` is the **property** that you're setting.
+`red` is the **value** that you're setting the property to.
 
 ### **Stylish**: Create and Link your CSS file to HTML
-- Create a file named `style.css` and save it to the same folder as your HTML file. Then add the following line to your HTML file in order to link the two:  
+Create a file named `style.css` and save it to the same folder as your HTML file. 
+
+Then add the following line to your HTML file in order to link the two:  
 ```HTML
 <!-- Inside the head tag -->
 <link rel="stylesheet" type="text/css" href="style.css">
 ```
 - You can also directly put all CSS code in a `<style>` tag. But separating them into two files is cleaner.
+
+Let's write some more CSS! What are some ways to add styles to text? Add to `style.css`:
+```css
+h1 {
+  font-size: 36px;
+  font-family: 'Comic Sans MS';
+}
+```
+There are many many CSS properties and if you're not sure what property name to use, search it up! For example, if I didn't know how to do rounded corners on an image, I could search up "rounded corners css." I would find some documentation on the property [border-radius](https://developer.mozilla.org/en-US/docs/Web/CSS/border-radius) and cool examples. Let's include the last one!
+
+```css
+img {
+  border-radius: 50% 20% / 10% 40%;
+}
+```
+
+<img src="images/borderradius.png" height="400">
+
+Your website should now look like this:
+
 
 ### **About Selection**: Class and ID
 All HTML tags have the attribute `class` and `id`. These 2 attributes can be used by CSS code to target the element to add style to. For example, let's say we only want to change the styles on the last three headings. We can specify a class named `noot` for these three headings like this in `index.html`:
@@ -242,7 +272,7 @@ This says that at 0% animation completion, the style will be red and translated 
 Now that the animation has been defined, you can use the property `animation`! Let's add the `fire` animation in `style.css` to the element with the id `last`:
 ```CSS
 #last {
-	color: green;
+	color: purple;
 	animation: fire 4s ease infinite;
 }
 ```
