@@ -18,14 +18,18 @@
 * [Install Node.js](https://nodejs.org/en/download/)
 
 ## What we'll be learning today
-* What is a "Server"?
+* What is a Server?
 * Basic JavaScript
 * Command Line
 * Node.js
-* NPM
+* NPM + Express
 
 ## Goal of today
 * Create your own server using node.js
+
+## Servers
+
+A server is a computer that *serves* content to other various devices (which we call clients).  It is important to note that, usually, the server and the client are different computers.  However, during our development, your computer will be both the server and the client!
 
 ## JavaScript
 Open Console in your Chrome Browser Developer's Tool:
@@ -180,7 +184,7 @@ To call/use the function,
 ```JS
 plus(5, 2);
 ```
-This does not do anything since you are not "capturing" the valued returned from a function.
+This does not do anything since you are not "remembering" the value returned from a function.
 
 We can "save" the returned value with a variable.
 ```JS
@@ -343,10 +347,10 @@ let x = 1;
 console.log(x + 1);
 ```
 
-Type <kbd>Ctrl</kbd>+<kbd>C</kbd> twice to exit.
+Type <kbd>Ctrl</kbd>+<kbd>C</kbd> twice **or** <kbd>Ctrl</kbd>+<kbd>D</kbd> once to exit.
 
 
-### Example: `node sum.js`
+### Example: Using a file (`node sum.js`)
 We create a folder on Desktop called `hackschool-2` and create a file named `sum.js` inside.
 
 In `sum.js`,
@@ -375,7 +379,7 @@ $ node sum.js
 Output "3" as expected.
 
 
-### Your own server!
+### Your own server! (Express)
 
 Web server software are very complicated creatures that require several upper-division CS classes to explain fully. However, in Node.js, __other people has already written the code__ necessary to start a server for you!
 
