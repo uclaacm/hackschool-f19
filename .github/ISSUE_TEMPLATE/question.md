@@ -13,6 +13,12 @@ assignees: ''
 **What you've tried**
 
 
+**Your code**
+```
+If applicable, copy/paste your code here between the triple backticks.
+Also copy-paste any applicable command-line interactions.
+```
+
 **Screenshots**
 If applicable, add screenshots to help explain your problem.
 
