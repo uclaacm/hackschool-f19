@@ -2,7 +2,7 @@
 name: Question
 about: Ask a question – for yourself and your classmates
 title: ''
-labels: help
+labels: help, unresolved
 assignees: ''
 
 ---
