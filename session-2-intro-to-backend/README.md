@@ -554,3 +554,15 @@ Let's say you want to host 2 webpages on your computer at the same time. But you
 So, people invented this concept called "port", which means there are multiple "entry points" on your computer/server. For example, Kristie's website could be served via port 3000, while Timothy and Galen's could be on port 8080.
 
 Try changing `app.listen(3000)` to `app.listen(8080)`. Now, we can only access our page at http://localhost:8080/mypage.
+
+# Back-end Session 1 Mini-project
+## Main Idea
+We want to write a new endpoint that takes a `get` request at the endpoint `/animal` (the full URL will be `localhost:3000/animal`) and send back the following:
+```html
+'<!DOCTYPE html><html><body>Your random animal is: [some random animal]</body></html>'
+```
+## Tasks
+* Create an array of animals and fill it with animals as strings (like `'dog'`).  
+* We used the `Math.random()` function previously.  Create a function called `randomInt` that takes one parameter called `max`.  The function should return a random integer between 0 and max *not including max*.
+    * You will find `Math.floor` useful for this
+* Create an endpoint that takes a get request at `/animal` and returns a page with a random animal from your list
