@@ -249,26 +249,26 @@ Objects can hold different types of data.
 
 We can even add more data to it…
 ```JS
-person.birthday = '9 Nov 1800';
-person['name'] = 'M&M'; // alternative syntax, notice the quote
+person.birthday = 17 Aug, 1948';
+person['name'] = 'Gene Block'; // alternative syntax, notice the quote
 ```
 
 … or change existing properties …
 ```JS
-person.age = 217;
+person.age = 71;
 ```
 
 We can put functions into objects as properties as well.
 ```JS
-person.rap = () => {
-  console.log("I'm beginning to feel like a web god, web god.");
+person.shout = () => {
+  console.log("AAAAHHHHHHHHH!");
 };
 ```
 
-We can tell M&M to rap for us by calling the `rap` function like this.
+We can tell Gene Block to shout by calling the `shout` function like this.
 ```JS
-person.rap()
-// I'm beginning to feel like a web god, web god.
+person.shout()
+// AAAAHHHHHHHHH!
 ```
 
 ## CLI (Command Line Interface)
