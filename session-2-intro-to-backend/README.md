@@ -249,7 +249,7 @@ Objects can hold different types of data.
 
 We can even add more data to it…
 ```JS
-person.birthday = 17 Aug, 1948';
+person.birthday = '17 Aug, 1948';
 person['name'] = 'Gene Block'; // alternative syntax, notice the quote
 ```
 
