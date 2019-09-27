@@ -555,7 +555,7 @@ So, people invented this concept called "port", which means there are multiple "
 
 Try changing `app.listen(3000)` to `app.listen(8080)`. Now, we can only access our page at http://localhost:8080/mypage.
 
-# Back-end Session 1 Mini-project
+# ⭐️ Back-end Session 1 Mini-project ⭐️
 ## Main Idea
 We want to write a new endpoint that takes a `get` request at the endpoint `/animal` (the full URL will be `localhost:3000/animal`) and send back the following:
 ```html
