@@ -172,7 +172,7 @@ function functionName(input1, input2) {
 }
 ```
 
-For this workshop, we will be using syntax 2.
+For this workshop, we will be using syntax 1.
 
 Let's write a function called "plus" that adds or concatenates two values together.
 ```JS
