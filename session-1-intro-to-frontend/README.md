@@ -1,5 +1,5 @@
 # Hackschool Session 1: Introduction to Web Development
-**Location**: Young CS 50
+**Location**: Young CS 50  
 **Time**: 6-8pm
 
 **Teachers**
