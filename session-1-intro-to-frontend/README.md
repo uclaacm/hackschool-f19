@@ -2,7 +2,7 @@
 **Location**: Young CS 50  
 **Time**: 6-8pm
 
-**Teachers**
+**Teacher**
 * Timothy Gu
 
 # Resources
@@ -15,6 +15,10 @@
 
 **Questions**
 * [Ask your question here!](http://goo.gl/forms/xyeFXLx9mrAXolCG3)
+
+**Other useful resources**
+* [Interneting is Hard](https://internetingishard.com/html-and-css/basic-web-pages/)
+* [MDN Docs](https://developer.mozilla.org/en-US/docs/Web)
 
 # What we'll be learning today
 - [Basic Dev Environment Setup](#basic-dev-environment-setup)
