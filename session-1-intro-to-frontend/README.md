@@ -1,10 +1,9 @@
 # Hackschool Session 1: Introduction to Web Development
-**Location**: Covel 227
+**Location**: Young CS 50
 **Time**: 6-8pm
 
 **Teachers**
-* Kristie Lim
-* Prateek Singh
+* Timothy Gu
 
 # Resources
 
