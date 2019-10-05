@@ -9,7 +9,7 @@
 # Resources
 
 **Slides**
-* [Session 1 - Introduction to Web Development](http://tinyurl.com/hackschool2018-1)
+* [Session 1 - Introduction to Web Development](http://tinyurl.com/hackschool19-w2slides)
 
 **ACM Membership Attendance Portal**
 * [Portal](http://members.uclaacm.com/login)
