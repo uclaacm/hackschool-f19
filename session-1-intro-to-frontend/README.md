@@ -78,7 +78,7 @@ HTML (Hyper Text Markup Language) is just text with some extra tags that describ
 
 ### HTML Setup
 1. Make a new folder.
-2. Open the folder in Sublime. File -> Open...
+2. Open the folder in VSCode or another text editor. File -> Open...
 3. Make a new file. File-> New File (shortcut is Ctrl/Cmd n)
 4. Save the file as `index.html`. Make sure to save in the folder you just created.
 
