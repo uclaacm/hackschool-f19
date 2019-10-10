@@ -3,7 +3,7 @@
 **Location**: WG Young Hall CS50
 **Teacher**: Timothy Gu
 
-# Resources
+## Resources
 
 **Slides**
 * [Session 1 - Introduction to Web Development](http://tinyurl.com/hackschool19-w2slides)
@@ -18,7 +18,7 @@
 * [Interneting is Hard](https://internetingishard.com/html-and-css/basic-web-pages/)
 * [MDN Docs](https://developer.mozilla.org/en-US/docs/Web)
 
-# What we'll be learning today
+## What we'll be learning today
 - [Basic Dev Environment Setup](#basic-dev-environment-setup)
 - [What is web development?](#what-happens-when-you-type-a-url-and-hit-enter)
 - [HTML](#html)
@@ -415,7 +415,7 @@ Next week will be an introduction to back-end web development! Afterwards, we'll
 * Dynamic Content with React
   * Right now, we’ve only been making static websites where the text is fixed. We’ll show you how to make content dynamic. For example, maybe you want to display the current weather which will change every time a user comes to your site.
 
-# Challenge
+## Mini-Project
 Create the front page of your alter ego as a dinosaur. (Other front pages also acceptable.)
 This is an [example](https://kristielim.github.io/kristriceratops/) and its [source code](https://github.com/kristielim/kristriceratops).
 
