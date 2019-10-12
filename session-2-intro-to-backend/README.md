@@ -205,8 +205,8 @@ const saySomething = () => {
 
 We can also have a function that returns nothing.
 ```JS
-const printHello = () => {
-  console.log('Heeeeeeeeeeello');
+const saySomething = () => {
+  console.log("I'm giving up on you");
   // no return statement
 };
 ```
