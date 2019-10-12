@@ -537,7 +537,6 @@ For now, our server only serves a local HTML file that doesn't change. The true 
 ```JS
 app.get('/random', (request, response) => {
   response.send('<!DOCTYPE html><html><body>Your random number is: ' + Math.random() + '</body></html>');
-  response.end();
 });
 ```
 
