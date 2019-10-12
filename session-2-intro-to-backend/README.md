@@ -222,8 +222,8 @@ const printNoot = () => {
 
 We can even call other functions within some function
 ```JS
-const bigBrainMath = () => {
-  return plus(2, 2) - 1;
+const double = (x) => {
+  return plus(x, x);
 };
 ```
 
