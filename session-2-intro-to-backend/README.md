@@ -1,5 +1,5 @@
 # Hackschool Session 2: Introduction to Backend Development
-**Location**: Covel 227, UCLA
+**Location**: Boelter 5249, UCLA
 
 **Time**: 6-8pm
 
