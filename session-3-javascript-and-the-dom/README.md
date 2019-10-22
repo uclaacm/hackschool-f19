@@ -10,7 +10,7 @@
 
 **Slides**
 
-- [Session 1 - Introduction to Web Development](http://tinyurl.com/hackschool19-w2slides)
+- [Session 3 - JavaScript and the DOM](https://tinyurl.com/hackschool19-w4slides-frontend)
 
 **ACM Membership Attendance Portal**
 
@@ -230,7 +230,7 @@ There are [many properties](https://developer.mozilla.org/en-US/docs/Web/API/Eve
 
 Read more about events [here](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events).
 
-# ⭐️ Front-end Session 2 Mini-project ⭐️
+# ⭐️ Bread Gallery ⭐️
 
 To get started with this project, go to the `demo` folder and copy/paste `index.html` to your own `index.html`. Feel free to change any of the images to your preferred images. Then create an empty `style.css` file and an empty `script.js` file in the same directory.
 
