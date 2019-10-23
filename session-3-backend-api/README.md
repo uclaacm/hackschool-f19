@@ -8,7 +8,7 @@
 
 ## Resources
 
-**Slides** TODO 
+**Slides** 
 * [Session 3 - API, HTTP, and JSON](https://docs.google.com/presentation/d/1jZdNj7ELvJaXlLmeEWr9JlG-YLf5gafUeAkVrn0XUpw/edit?usp=sharing)
 
 **ACM Membership Attendance Portal**
@@ -321,7 +321,7 @@ Let's head back over to the website now.
 
 VOILA! Our message is there. 
 
-<img src='images/post.png' width='500px'>
+<img src='images/post.png'>
 
 
 ### What is under the hood in browser?
