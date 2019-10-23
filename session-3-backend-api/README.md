@@ -327,7 +327,7 @@ VOILA! Our message is there.
 ### What is under the hood in browser?
 
 So when we make posts on websites like Facebook, Twitter, etc, there is code underneath that does exactly what we did in Postman. 
-It formats the request header and body, and send it to the server using the URL.
+It formats the request header and body, and sends it to the server using the URL.
 
 
 ## What is an API?
@@ -382,14 +382,16 @@ Let's make an endpoint to return some random numbers in JSON.
 
 ```JS
 app.get('/random', function (request, response) {
-    let myJSON = {};
-    myJSON.number = Math.random();
+    const myJSON = {
+        number: Math.random()
+    };
     // myJSON at this point should look like this
     // { "number": 123 }
     response.json(myJSON);
 });
 
 app.listen(3000);
+console.log("Yay our server is running! Access it through localhost:3000");
 ```
 * the `response.json` function allows us to pass in an object and express will send it back to the user.
 * `Math.random` is a built in function to generate a random number.
@@ -433,6 +435,7 @@ app.post('/name', function (request, response) {
 });
 
 app.listen(3000);
+console.log("Yay our server is running! Access it through localhost:3000");
 ```
 * `app.post` specifies that this endpoint takes a `POST` request.
 * `request.body` contains the JSON in the `body` of the **req**uest.
