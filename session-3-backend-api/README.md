@@ -9,7 +9,7 @@
 ## Resources
 
 **Slides** TODO 
-* [Session 3 - API, HTTP, and JSON](TODO)
+* [Session 3 - API, HTTP, and JSON](https://docs.google.com/presentation/d/1jZdNj7ELvJaXlLmeEWr9JlG-YLf5gafUeAkVrn0XUpw/edit?usp=sharing)
 
 **ACM Membership Attendance Portal**
 * [Portal](http://members.uclaacm.com/login)
@@ -168,31 +168,44 @@ But how do we send a request with a `POST` method? We can't just type in a URL i
 
 `POST` requests are usually done under the hood for you by JavaScript. 
 
-<details>
-<summary>TODO: Make a simple server?</summary>
-Let's try it out:
 
-* Open the network tab in Chrome DevTools
+## HTTP Responses
 
-* Go to `http://hackschool18.azurewebsites.net/upload`
+After a client makes a request to the server, the server is going to process the request and the send a response back. This response is going to be formatted the same as our requests are with a Header and a Body. They will contain slightly different information though. 
 
-* Open the new tab `http://hackschool18.azurewebsites.net` to see your message
+### Header
 
-* Type in your name/messages and click Send.
+This will contain some general information about the response. One of these important pieces of information is the *Status Code*. 
 
-* See the upload in console!
+You have probably seen the infamous Error 404 page.
 
+<img src='images/error404.png' width='500'>
 
-We can see in the request header, we have a method as `POST`.
+404 is actually a status code!
 
-We can also see the `Request Payload`, which is the `body`, containing the message that we send.
+#### HTTP Status Code
 
-```JS
-{ message: 'my msg', sender: 'Kristie' }
+In the `header`, there is a field called `status` containing a number. That number indicates if your request was successful.
+
+```
+2XX: The request was successful
+4XX: The request was not successful and client probably messed up.
+5XX: The request was not successful and server probably messed up.
 ```
 
-The format looks familiar right?
-</details>
+So if you've ever seen Error 404, this means you've made a bad request to the server (like accessing a page that doesn't exist).
+
+### Body
+
+In the `body`, it will contain whatever data is sent back. The data can be JSON/HTML, a random string of text, or even nothing at all. This is simply the data that the server is sending back to the client. 
+
+
+Let's check the Chrome developer console and go to `www.google.com`.
+
+* We can find `status` in the `Response Header` tab under the `Header` section.
+* We can also see the `Response` tab to see what is contained in the body.
+* The `Preview` tab provides a prettier view of the `body` data.
+
 
 ## What is JSON?
 
@@ -224,17 +237,22 @@ It returns a JSON!
 
 ## Postman
 
-Great, we now know we can get data from `GET` request as well. 
-Let me introduce you to some fantastic software to do testing on HTTP requests.
+We know that we make GET requests all the time through URLs in our browsers. But how about POST requests? 
 
-In Postman, you can make `GET`/`POST` requests. 
+At this point in time, we have not learned how to actually code a POST request. But wouldn't it be great if we had a tool where we could write the body of our POST request, hit a button, and make a POST request to an actual website?
 
-Let's try to `GET` a webpage. 
-```
-www.example.com
-```
+This is where __Postman__ comes in handy! A bunch of really smart people realized the need to test HTTP requests and created a program that allows us to easily make all different types of HTTP Requests with the push of a button. We will also be able to see the HTTP Response sent back as well!
 
-We can see that it sent us back some HTML. We can preview it using the `preview` tab.
+## Making a GET Request
+Just as we can make a GET request through the browser, we can make one in Postman!
+
+Open Postman and make sure the type of request is GET. 
+
+Type https://hack.uclaacm.com/ into the request URL and hit SEND. 
+
+We should now see the HTML returned to us! There should also be a `Status Code: 200` which means that our GET request was successful!
+
+We can also preview the HTML using the `preview` tab.
 
 ![Postman Response Tab](images/postmanResTab.png)
 
@@ -244,23 +262,43 @@ Let's try with the cat fact example again.
 cat-fact.herokuapp.com/facts/random
 ```
 
-Now, we know that we cannot perform a `POST` request with a browser directly, but we can with Postman!
+We should now get a JSON returned to us. 
 
-* Put `http://hackschool18.azurewebsites.net/message`
-* Select `POST` next the URL field
-* Choose the `body` tab  
-* Select `raw` and choose `JSON (application/json)`
-* Type the following
-* Open the new tab `http://hackschool18.azurewebsites.net` to see your message
+## Making a Post Request
 
-```JS
+Let's try making a post request now. Recall that our POST request is going to send data to the server and so we will need to put data into the body of our POST request. 
+
+We will try this out with a simple webpage. In your browser, go to: https://hack-stream.azurewebsites.net/
+
+We get a....BLANK WEB PAGE :D
+
+Okay not too exciting, but we can actually make a POST request to the server and put messages on this page. Then other people will be able to see our messages when they visit the URL. 
+
+Let's try this out. 
+
+Leave the website open in the browser and go back to Postman. 
+
+This website accepts POST requests through an endpoint labeled `/message`. So change our request URL to: https://hack-stream.azurewebsites.net/message
+
+Make sure we also change the type of method to POST. 
+
+Now when we hit SEND we get....
+
+Oof just an Error Code 400. This is because we haven't actually put anything in our body to send to the server. 
+
+![400 bad request](images/400postman.png)
+
+To fix this, navigate over to the BODY tab in Postman. We're going to change the type of our Body to `raw`. Then change the dropdown from `TEXT` to `JSON`. We are now ready to write the body of our POST request. 
+
+This website will take in a body with a JSON formatted as such: 
+```js
 {
-  "message": "my msg",
-  "sender": "Krisite"
+    "sender": "jisoo",
+    "message": "let's kill this love"
 }
 ```
 
-Now, we click send. Magic happens!
+As we can see, we have 2 required fields `sender` and `message`. One our hack officers has coded this such that these are required. If we don't include them, we will get a response with an error code. 
 
 Notice that Postman automatically sets one property in the header. 
 
@@ -270,51 +308,27 @@ Content-Type: application/json
 
 `Content-Type` tells the server what is inside our `body`. That way, the server will know how to interpret/understand it. In this case, the server will interpret the body as JSON, or a JavaScript object. 
 
-Also notice that we get a JSON response back.
-```JS
+Now hit SEND.
+
+If we scroll down in POSTMAN, we can see that we were sent back a Response containing a JSON:
+```js
 {
     "status": "Success!"
 }
 ```
-This means that in a POST request, although we are uploading things, the server can still send a response back too! If the server wants, it could send back a HTML page. 
+
+Let's head back over to the website now.
+
+VOILA! Our message is there. 
+
+<img src='images/post.png' width='500px'>
+
 
 ### What is under the hood in browser?
 
-When we click the `send` button in browser to send a message, the JavaScript code underneath does exactly what we did in Postman. 
-It formatted the request header and body, and send it to the server using the URL.
+So when we make posts on websites like Facebook, Twitter, etc, there is code underneath that does exactly what we did in Postman. 
+It formats the request header and body, and send it to the server using the URL.
 
-## HTTP Status Code
-Ok, let's say you are uploading a message. How do you know that your message got successfully uploaded?
-
-The __response__ can tell us!
-
-A HTTP response is just like a request. It has a __header__ and __body__.
-
-
-In the `header`, there is a field called `status` containing a number. That number indicates if your request was successful.
-
-```
-2XX: The request was successful
-4XX: The request was not successful and client probably messed up.
-5XX: The request was not successful and server probably messed up.
-```
-
-In the `body`, it will contain whatever data is sent back. The data can be JSON/HTML, a random string of text, or even nothing at all.
-
-
-Let's check the Chrome developer console and go to `www.google.com`.
-
-* We can find `status` in the `Response Header` tab under the `Header` section.
-* We can also see the `Response` tab to see what is contained in the body.
-* The `Preview` tab provides a prettier view of the `body` data.
-
-We can do this in Postman as well.
-
-Let's send a message to `http://hackschool18.azurewebsites.net/message` but without a body.
-
-We can see the error code, and nothing is being returned. 
-
-![400 bad request](images/400postman.png)
 
 ## What is an API?
 API stands for __Application Programming Interface__. An API is a definition of methods of communication among various components. 
@@ -347,7 +361,7 @@ Setup:
 
 ```bash
 $ pwd
-/Users/galenw/Desktop
+/Users/AsuS/Desktop
 $ mkdir myAPIserver
 $ cd myAPIserver
 $ npm init
@@ -367,21 +381,21 @@ const app = express();
 Let's make an endpoint to return some random numbers in JSON. 
 
 ```JS
-app.get('/random', (req, res) => {
+app.get('/random', function (request, response) {
     let myJSON = {};
     myJSON.number = Math.random();
     // myJSON at this point should look like this
     // { "number": 123 }
-    res.json(myJSON);
+    response.json(myJSON);
 });
 
-app.listen(8080);
+app.listen(3000);
 ```
-* the `res.json` function allows us to pass in an object and express will send it back to the user.
+* the `response.json` function allows us to pass in an object and express will send it back to the user.
 * `Math.random` is a built in function to generate a random number.
 
 
-We do a `GET` to `localhost:8080/random` in Postman.
+We do a `GET` to `localhost:3000/random` in Postman.
 
 However, what happens when we do a `POST` on that URL?
 
@@ -398,36 +412,38 @@ This line tells express that the input body might contain JSON object. If expres
 
 ```JS
 app.use(express.json());
-app.post('/name', (req, res) => {
-    const message = req.body;
-    if (message.name == undefined ) {
-        res.status(400);
+app.post('/name', function (request, response) {
+    const body = request.body;
+    if (body.name === undefined ) {
+        response.status(400);
         const wrong = {
             message: "Input JSON does not contain key 'name'"
         };
-        res.json(wrong);
+        response.json(wrong);
         return;
     }
     else {
-        const sayHi = "Hello " + message.name;
+        const sayHi = "Hello " + body.name;
         console.log(sayHi);
         const resJSON = {
             message: sayHi
         };
-        res.json(resJSON);
+        response.json(resJSON);
     }
-})
+});
+
+app.listen(3000);
 ```
 * `app.post` specifies that this endpoint takes a `POST` request.
-* `req.body` contains the JSON in the `body` of the **req**uest.
+* `request.body` contains the JSON in the `body` of the **req**uest.
 * We used a if-statement to check if the `name` key exists in the body.
-* If no, we return a JSON saying the input is invalid with status code 400.
-* `res.status` helps us to set the `status` in the response header.
+* If not, we return a JSON saying the input is invalid with status code 400.
+* `response.status` helps us to set the `status` in the response header.
 * If it does contain `name`, we return a message saying hello. 
 
 
 Let's test it with Postman.
-* Put `localhost:8080/name`
+* Put `localhost:3000/name`
 * Select `POST` next the URL field
 * Choose the `body` tab  
 * Select `raw` and choose `JSON (application/json)`
@@ -459,16 +475,36 @@ Now we get an error with status code `400`!
 You have just written your first API!
 
 ## Your Task
-1. Create another API endpoint called randomFact that will return a random fact about yourself. Have the server respond with a JSON. 
+1. Create another API endpoint called randomFact that will return a random fact about yourself. Have the server respond with a JSON. You can decide how to randomize this fact. This will be a GET request.
 
-2. Create a POST request that will take that has a JSON body formatted like this:
+<details>
+<summary>Hint</summary>
+Look up arrays in JavaScript and find a way to randomly select an element from the array.
+</details>
+
+2. Create another API endpoint called `dog` that will return an HTML page with a picture of a dog. You will have to put the HTML in another file separate from `index.js`. You may use this HTML if you want:
+```html
+<!DOCTYPE html>
+<html>
+	<head></head>
+	<body>
+		<img src='https://www.purina.com.au/-/media/Project/Purina/Main/Breeds/Dog/Mobile/Dog_Samoyed_Mobile.jpg?h=300&la=en&w=375&hash=EE6529E6036EFD00F71DA4045ED88F0D'/>
+	</body>
+</html>
+
+```
+Refer back to last week's README to see how we can send back an HTML file as a response. 
+
+3. Create a POST request that will take that has a JSON body formatted like this:
 ```js
 {
     "name": "yeji",
     "comment": "i see that i'm icy"
 }
 ```
-Have our response return an error with a status code of 400 of either of these are not found in the body. Return an error message as a JSON. If both are present, console.log both of them and send a JSON back with a comment in the form:
+Have our response return an error with a status code of 400 if neither `name` nor `comment` are not found in the body. Return an error message as a JSON. 
+
+If both are present, console.log both of them and send a JSON back with a comment in the form:
 ```
 "message" : "(name) said (comment)"
 ```
