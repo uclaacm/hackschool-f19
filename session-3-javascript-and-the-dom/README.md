@@ -1,4 +1,4 @@
-# Hackschool Session 2: Introduction to Backend Development
+# Hackschool Session 3: JavaScript and the DOM
 
 **Location**: Boelter 5249, UCLA
 
