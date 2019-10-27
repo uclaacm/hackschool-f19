@@ -1,8 +1,8 @@
-# Hackschool Session 3: Introduction to Express
+# Hackschool Session 4: Introduction to Express
 
 **Location**: Boelter 5249, UCLA
 
-**Time**: 6-7pm
+**Time**: 7-8pm
 
 **Teacher**
 
@@ -129,7 +129,8 @@ const app = express();
 
 app.use(express.json());
 
-app.listen(3000, () => { console.log('listening on 3000'); });
+app.listen(3000);
+console.log('server listening on 3000');
 ```
 
 To check that you have got everything right,
@@ -138,7 +139,8 @@ execute `index.js` with `node`.
 node index.js
 # output: listening on 3000
 ```
-> Note: You can stop the server program with ctrl + c
+> Note: You can stop the server program with 
+> <kbd>ctrl</kbd> + <kbd>c<kbd>
 
 In the application, we will store some user information.
 Let's implement one endpoint that creates an user,
@@ -176,10 +178,35 @@ app.get('/user/:user', (req, res) => {
 });
 
 app.listen(3000);
+console.log('server listening on 3000');
 ```
 > A `Map` object is like a dictionary, mapping from one value to another. It is
 > like an object in that it also represents a collection of key-value pairs,
 > but is faster for data storage.
+
+### Route Parameters
+
+In our endpoint to get user information, the route
+is specified as `/user/:user`. This does not mean
+the user is going to make a request with URL such as
+`localhost:3000/user/:user`, but rather express will
+extract the string at the position of `:user` and put
+it into the `req.params` object.
+
+For example, in our `/user/:user` endpoint,
+
+```
+Route path: /user/:user
+Request URL: http://localhost:3000/user/Galen
+req.params: { "user": "Galen" }
+```
+
+Here is a more complicated example,
+```
+Route path: /flights/:from-:to
+Request URL: http://localhost:3000/flights/LAX-SFO
+req.params: { "from": "LAX", "to": "SFO" }
+```
 
 ### What is a Router? 
 
@@ -288,6 +315,7 @@ router.get('/user/:user', (req, res) => {
 
 // we deleted the following line ❌❌❌
 // app.listen(3000);
+// console.log('server listening on 3000');
 
 // we added the following line ➕➕➕
 module.exports = router;
@@ -309,6 +337,7 @@ app.use(express.json());
 app.use(userEndpoints);
 
 app.listen(3000);
+console.log('server listening on 3000');
 ```
 
 The `userEndpoints` object will be the `router` that
@@ -366,6 +395,7 @@ app.use(express.json());
 app.use('/user', userEndpoints);
 
 app.listen(3000);
+console.log('server listening on 3000');
 ```
 
 `routes/user.js`
@@ -421,5 +451,6 @@ app.use('/user', userEndpoints);
 app.use('/drawing', drawingEndpoints):
 
 app.listen(3000);
+console.log('server listening on 3000');
 ```
 
