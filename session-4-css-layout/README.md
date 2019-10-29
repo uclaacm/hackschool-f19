@@ -1,5 +1,5 @@
 # Hackschool Session 4 Frontend: CSS Layout
-**Location**: Boelter 5422 
+**Location**: Boelter 5249 
 **Time**: 6:00–7:00pm, October 30, 2019.
 
 **Teacher**: Shirly Fang
