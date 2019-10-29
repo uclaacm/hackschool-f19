@@ -1,0 +1,53 @@
+html {
+	height: 100%;
+}
+body {
+	background-color: black;
+	height: 100%;
+}
+
+h1 {
+	position: absolute;
+	color: white;
+	font-family: 'Comic Sans MS';
+}
+
+img {
+	height: 100px;
+	width: 100px;
+	animation: jump 1s linear infinite;
+}
+
+.bunny-container {
+	height: 300px;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	flex: 0 1 50%;
+}
+
+.bunny-garden {
+	height: 100%;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+img:nth-child(odd) {
+	align-self: flex-end;
+}
+  
+img:nth-child(even) {
+	align-self: flex-start;
+}
+
+@media (max-width: 1000px) {
+	.bunny-container {
+		flex: 0 1 100%;
+	}
+}
+
+@keyframes jump {
+	0%   {transform: translate3d(0,0,0) scale3d(1,1,1);}
+	20%  {transform: translate3d(0,30%,0) scale3d(.7,1.5,1);}
+	100% {transform: translate3d(0,100%,0) scale3d(1.5,.7,1);}
+}
