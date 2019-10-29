@@ -232,7 +232,7 @@ To change styling based on the size of a screen, we can use something in CSS cal
 ```css
 @media (max-width: 1000px) {
 	.bunny-container {
-		flex: 0 0 100%;
+		flex: 0 1 100%;
 	}
 }
 ```

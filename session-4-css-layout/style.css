@@ -42,7 +42,7 @@ img:nth-child(even) {
 
 @media (max-width: 1000px) {
 	.bunny-container {
-		flex: 0 0 100%;
+		flex: 0 1 100%;
 	}
 }
 
