@@ -1,4 +1,4 @@
-# Hackschool Session 3: JavaScript and the DOM
+# Hackschool Session 3 Frontend: JavaScript and the DOM
 
 **Location**: Boelter 5249, UCLA
 
