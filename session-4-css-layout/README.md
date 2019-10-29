@@ -84,6 +84,7 @@ Let's add some images:
 ```css
 img {
 	height: 100px;
+	width: 100px;
 }
 ```
 
@@ -155,25 +156,17 @@ A similar property that moves your items along the cross axis is `align-items`.
 We can also set properties of the child flex items. For example, let's use the `align-self` property to put our bunnies in dance formation:
 
 ```css
-.down {
+img:nth-child(odd) {
 	align-self: flex-end;
 }
-
-.up {
+  
+img:nth-child(even) {
 	align-self: flex-start;
 }
 ```
 
-Here I'm creating two new classes, `up` and `down`. I'll alternate the classes in my html:
-```html
-	<div class="bunny-container">
-		<img class="down" src="https://cdn3.iconfinder.com/data/icons/animal-flat-colors/64/rabbit-512.png">
-		<img class="up" src="https://cdn3.iconfinder.com/data/icons/animal-flat-colors/64/rabbit-512.png">
-		<img class="down" src="https://cdn3.iconfinder.com/data/icons/animal-flat-colors/64/rabbit-512.png">
-		<img class="up" src="https://cdn3.iconfinder.com/data/icons/animal-flat-colors/64/rabbit-512.png">
-		<img class="down" src="https://cdn3.iconfinder.com/data/icons/animal-flat-colors/64/rabbit-512.png">
-	</div>
-```
+Here I'm selecting the image elements that fit the source code ordering criteria of either being an even-indexed element or odd-indexed element. Oddly ordered elements
+will have the flex-end value while evenly ordered elements will have flex-start. This  :nth-child(val) selector is so I won't have to make new CSS rules and assign each image with class="new-style".
 
 For a complete list of properties and their values, see [CSS-Tricks: A Guide to Flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
 
@@ -187,32 +180,31 @@ To do this in flexbox, we can set the `flex` property of our child items.
 
 The goal of the next few steps is to have two bunny containers, one that is on the right half of the screen and one that is on the left half. 
 
-To do this, I'm going to have my body act as a flex container and my bunny-container act as a flex item. It's important to note that you can nest flexboxes.
+To do this, I'm going to create a bunny-garden to act as a flex container and my bunny-container act as a flex item. It's important to note that you can nest flexboxes.
 
-Add a second bunny-container:
+Add a second bunny-container and put both containers inside of the bunny-garden:
 ```html
-<body>
+<div class="bunny-garden">
 	<div class="bunny-container">
-		<img class="down" src="https://cdn3.iconfinder.com/data/icons/animal-flat-colors/64/rabbit-512.png">
-		<img class="up" src="https://cdn3.iconfinder.com/data/icons/animal-flat-colors/64/rabbit-512.png">
-		<img class="down" src="https://cdn3.iconfinder.com/data/icons/animal-flat-colors/64/rabbit-512.png">
-		<img class="up" src="https://cdn3.iconfinder.com/data/icons/animal-flat-colors/64/rabbit-512.png">
-		<img class="down" src="https://cdn3.iconfinder.com/data/icons/animal-flat-colors/64/rabbit-512.png">
+		<img src="https://cdn3.iconfinder.com/data/icons/animal-flat-colors/64/rabbit-512.png">
+		<img src="https://cdn3.iconfinder.com/data/icons/animal-flat-colors/64/rabbit-512.png">
+		<img src="https://cdn3.iconfinder.com/data/icons/animal-flat-colors/64/rabbit-512.png">
+		<img src="https://cdn3.iconfinder.com/data/icons/animal-flat-colors/64/rabbit-512.png">
+		<img src="https://cdn3.iconfinder.com/data/icons/animal-flat-colors/64/rabbit-512.png">
 	</div>
 	<div class="bunny-container">
-		<img class="down" src="https://cdn3.iconfinder.com/data/icons/animal-flat-colors/64/rabbit-512.png">
-		<img class="up" src="https://cdn3.iconfinder.com/data/icons/animal-flat-colors/64/rabbit-512.png">
-		<img class="down" src="https://cdn3.iconfinder.com/data/icons/animal-flat-colors/64/rabbit-512.png">
-		<img class="up" src="https://cdn3.iconfinder.com/data/icons/animal-flat-colors/64/rabbit-512.png">
-		<img class="down" src="https://cdn3.iconfinder.com/data/icons/animal-flat-colors/64/rabbit-512.png">
+		<img src="https://cdn3.iconfinder.com/data/icons/animal-flat-colors/64/rabbit-512.png">
+		<img src="https://cdn3.iconfinder.com/data/icons/animal-flat-colors/64/rabbit-512.png">
+		<img src="https://cdn3.iconfinder.com/data/icons/animal-flat-colors/64/rabbit-512.png">
+		<img src="https://cdn3.iconfinder.com/data/icons/animal-flat-colors/64/rabbit-512.png">
+		<img src="https://cdn3.iconfinder.com/data/icons/animal-flat-colors/64/rabbit-512.png">
 	</div>
-</body>
+</div>
 ```
 
-Make the body a flexbox:
+Make the bunny-garden a flexbox:
 ```css
-body {
-	background-color: black;
+.bunny-garden {
 	height: 100%;
 	display: flex;
 }
@@ -226,7 +218,7 @@ Use the `flex` property to set what percentage of the screen you want the width 
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
-	flex: 0 0 50%;
+	flex: 0 1 50%;
 }
 ```
 
@@ -254,14 +246,13 @@ Comment out the borders:
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
-	flex: 0 0 50%;
+	flex: 0 1 50%;
 }
 ```
 
 The child items will be too big for their parent, but I still want them to wrap around on the screen. So I can set the `flex-wrap` property.
 ```css
-body {
-	background-color: black;
+.bunny-garden {
 	height: 100%;
 	display: flex;
 	flex-wrap: wrap;
@@ -278,11 +269,11 @@ I want to center my heading in my container. How would I do this? Let's try putt
 ```html
 	<div class="bunny-container">
 		<h1>bunny hop party</h1>
-		<img class="down" src="https://cdn3.iconfinder.com/data/icons/animal-flat-colors/64/rabbit-512.png">
-		<img class="up" src="https://cdn3.iconfinder.com/data/icons/animal-flat-colors/64/rabbit-512.png">
-		<img class="down" src="https://cdn3.iconfinder.com/data/icons/animal-flat-colors/64/rabbit-512.png">
-		<img class="up" src="https://cdn3.iconfinder.com/data/icons/animal-flat-colors/64/rabbit-512.png">
-		<img class="down" src="https://cdn3.iconfinder.com/data/icons/animal-flat-colors/64/rabbit-512.png">
+		<img src="https://cdn3.iconfinder.com/data/icons/animal-flat-colors/64/rabbit-512.png">
+		<img src="https://cdn3.iconfinder.com/data/icons/animal-flat-colors/64/rabbit-512.png">
+		<img src="https://cdn3.iconfinder.com/data/icons/animal-flat-colors/64/rabbit-512.png">
+		<img src="https://cdn3.iconfinder.com/data/icons/animal-flat-colors/64/rabbit-512.png">
+		<img src="https://cdn3.iconfinder.com/data/icons/animal-flat-colors/64/rabbit-512.png">
 	</div>
 ```
 
