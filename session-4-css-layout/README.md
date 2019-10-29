@@ -51,8 +51,8 @@ body {
 }
 
 h1 {
-    color: white;
-    font-family: 'Comic Sans MS';
+	color: white;
+   	font-family: 'Comic Sans MS';
 }
 ```
 
@@ -70,13 +70,13 @@ Let's add some images:
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>bunny hop party</h1>
-  <h1>bunny hop party</h1>
-		<img src="https://cdn3.iconfinder.com/data/icons/animal-flat-colors/64/rabbit-512.png">
-		<img src="https://cdn3.iconfinder.com/data/icons/animal-flat-colors/64/rabbit-512.png">
-		<img src="https://cdn3.iconfinder.com/data/icons/animal-flat-colors/64/rabbit-512.png">
-		<img src="https://cdn3.iconfinder.com/data/icons/animal-flat-colors/64/rabbit-512.png">
-		<img src="https://cdn3.iconfinder.com/data/icons/animal-flat-colors/64/rabbit-512.png">
+	<h1>bunny hop party</h1>
+	<h1>bunny hop party</h1>
+	<img src="https://cdn3.iconfinder.com/data/icons/animal-flat-colors/64/rabbit-512.png">
+	<img src="https://cdn3.iconfinder.com/data/icons/animal-flat-colors/64/rabbit-512.png">
+	<img src="https://cdn3.iconfinder.com/data/icons/animal-flat-colors/64/rabbit-512.png">
+	<img src="https://cdn3.iconfinder.com/data/icons/animal-flat-colors/64/rabbit-512.png">
+	<img src="https://cdn3.iconfinder.com/data/icons/animal-flat-colors/64/rabbit-512.png">
 </body>
 </html>
 ```
