@@ -10,7 +10,7 @@
 
 **Slides**
 
-- [TBD]()
+- [Slides](https://docs.google.com/presentation/d/1cy9AZdiZY5d3i59HL3ltGb1w0KX_-FNHHKZteRpa-ic/edit?usp=sharing)
 
 
 **ACM Membership Attendance Portal**
