@@ -22,7 +22,7 @@
 ## Synchronous Vs Asynchronous Programming
 Normally, our programs run synchronously. Synchronous means that, if we run two tasks, the second task must wait for the first one to complete before running. No cuts, no buts, no coconuts! 
 
-<img src="assets/sync.png" alt="Synchronous Chart">
+<img src="assets/sidebyside.png" alt="Synchronous Chart">
 
 However, this is not always what we want. To demonstrate this, let's use an analogy.  Let's say we have an action we want to do – boiling water. This corresponds to an action a server might do like getting a file over the internet.
 
@@ -165,7 +165,7 @@ Let's apply this to the pasta problem:
 ```javascript
 const boilWater = () => {
   console.log('Start boiling!');
-  return Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     setTimeout(() => {
         console.log('Water boiled!');
         resolve();
@@ -173,9 +173,7 @@ const boilWater = () => {
   })
 }
 
-boilWater().then(() => {
-  addPasta();
-});
+boilWater().then(addPasta);
 //Start boiling!
 //Water boiled!
 //Pasta in da wata~
@@ -201,7 +199,7 @@ There are two keywords `async` and `await` that make your code look a lot cleane
 You use `async` when you declare a function. It means that the function will return a `Promise`. Even if you don't explicitly return a `Promise`, an async function will return a `Promise`.
 
 ```js
-async function f() {
+const f = async () => {
   return 1;
 }
 
@@ -215,11 +213,11 @@ In an `async` function, you can use `await` before a promise. This pauses the ex
 **Important!** You can only use `await` inside of an `async` function.
 
 ```js
-async function f() {
+const f = async () => {
   return 1; //implicitly a promise because of async
 }
 
-async function main() {
+const main = async () => {
   let result = await f(); // waits until result is filled before moving on
   console.log(result);
 }
@@ -231,7 +229,7 @@ With `await`, we don't need to nest a bunch of `.then()`'s.
 This is another way to call the pasta functions so that we will add the pasta after we boil the water.
 
 ```js
-async function main() {
+const main = async () => {
   await boilWater();
   addPasta();
   await washVeggies();
@@ -252,7 +250,7 @@ If we run this, you might notice that it still takes 5 seconds to complete.
 How can we run boilWater and washVeggies in parallel?
 We can push the two returned promises onto an array and then use `Promise.all()`:
 ```js
-async function main() {
+const main = async () => {
   const allPromises = [];
   allPromises.push(boilWater());
   allPromises.push(washVeggies());
@@ -264,7 +262,7 @@ async function main() {
 
 Let's boil 5 pots of water at a time!
 ```js
-async function main() {
+const main = async () => {
   const allPromises = [];
   for (let i = 0; i < 5; i++) {
     allPromises.push(boilWater());
@@ -276,7 +274,7 @@ async function main() {
 
 Another important thing to note about promises is that they can resolve into values. This value can be a string, number, object, etc... Let's have the `Promise` returned by `boilWater` return a success message:
 ```js
-function boilWater() {
+const boilWater = () => {
   console.log('Start boiling!');
   return new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -315,17 +313,17 @@ In a new file:
 ```js
 const fetch = require('node-fetch');
 
-async function getJokeFromServer() {
-  const res = await fetch('http://api.icndb.com/jokes/random');
+const getCatFactFromServer = async () => {
+  const res = await fetch('https://cat-fact.herokuapp.com/facts/random');
   return res.json();
 }
 
-async function main() {
-  const jsonFromServer = await getJokeFromServer();
+const main = async () => {
+  const jsonFromServer = await getCatFactFromServer();
   // Uncomment the following lines if you want to see the json data you got from the server
   // console.log('This is from the server:');
   // console.log(jsonFromServer);
-  console.log(jsonFromServer.value.joke);
+  console.log(jsonFromServer.text);
 }
 
 main();
@@ -335,28 +333,28 @@ main();
 
 `res.json()` returns a promise that is resolved to the json data from the server.
 
-What if we want to ask for many jokes at the same time?
+What if we want to ask for many cat facts at the same time?
 ```js
-async function main() {
+const main = async () => {
   const allPromises = [];
   for (let i = 0; i < 5; i++) {
-    allPromises.push(getJokeFromServer());
+    allPromises.push(getCatFactFromServer());
   }
-  const allJokes = await Promise.all(allPromises);
-  for (const jsonFromServer of allJokes) {
-    console.log(jsonFromServer.value.joke);
+  const allCatFacts = await Promise.all(allPromises);
+  for (const jsonFromServer of allCatFacts) {
+    console.log(jsonFromServer.text);
   }
 }
 ```
 
 Neat!
 ```
-When Chuck Norris falls in water, Chuck Norris doesn't get wet. Water gets Chuck Norris.
+A cat has approximately 60 to 80 million olfactory cells (a human has between 5 and 20 million).
 ```
 
 ## With Express
 
-Remember in previous sessions, we used Express to serve data. Let's serve some data from the Internet Chuck Norris Database! In the future, we'll be serving data from our own database. 
+Remember in previous sessions, we used Express to serve data. Let's serve some data from a cat facts database! In the future, we'll be serving data from our own database. 
 
 Install Express:
 ```shell
@@ -369,15 +367,15 @@ const fetch = require('node-fetch');
 const express = require('express');
 const app = express();
 
-async function getJokeFromServer() {
-  const res = await fetch('http://api.icndb.com/jokes/random');
+const getCatFactFromServer = async () => {
+  const res = await fetch('https://cat-fact.herokuapp.com/facts/random');
   return res.json();
 }
 
 app.get('/', async (req, res) => {
-  const jsonFromServer = await getJokeFromServer();
-  const joke = jsonFromServer.value.joke;
-  res.end(joke);
+  const jsonFromServer = await getCatFactFromServer();
+  const fact = jsonFromServer.text;
+  res.send(fact);
 });
 
 app.listen(3000);
