@@ -86,7 +86,7 @@ This is going to take a total of 5 seconds, but really, it did not have to take 
 
 Are you going to wait for your water to boil before you start washing your veggies?
 
-No! We don't need to stare at our water boiling!  and as engineers and cooks, we're all about efficiency here.
+No! We don't need to stare at our water boiling!  As engineers and cooks, we're all about efficiency here.
 
 What we want to do is start boiling the water, and while the water is boiling, we start washing the veggies.
 
