@@ -379,6 +379,7 @@ app.get('/', async (req, res) => {
 });
 
 app.listen(3000);
+console.log("Server started!");
 ```
 
 To start your server from the command line:
