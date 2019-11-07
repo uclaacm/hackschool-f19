@@ -7,10 +7,10 @@
 ## Resources
 
 **Slides**
-* [Session 5 Frontend: React](https://docs.google.com/presentation/d/1TApzt5ti0GoPTCUy56hH792AT5-8tC3RnrxzLEIUifE/edit)
+* [Session 5 Frontend: React](https://docs.google.com/presentation/d/1TApzt5ti0GoPTCUy56hH792AT5-8tC3RnrxzLEIUifE/edit?usp=sharing)
 
 **ACM Membership Attendance Portal**
-* [Portal](https://members.uclaacm.com/login)
+* [Portal](https://members.uclaacm.com/login) – code: **AsyncReaxOnly**
 
 ## What we'll be learning today
 
@@ -108,9 +108,39 @@ Once you define a component, you can easily reuse it.
 
 Before we dive into React, we have to learn the syntax of **classes** in JavaScript.
 
+### Motivation of classes
+
+Recall how we made objects representing people. We use the _object literal_ syntax:
+
+```js
+const kristie = {
+  name: 'Kristie',
+  age: 20
+};
+const tim = {
+  name: 'Tim',
+  age: 55
+};
+```
+
+We notice two things in particular: the two objects representing people have properties with the same keys but differing values. Additionally, in order to create two objects, we have to duplicate many of the same things in both instances.
+
+Let's now try to add a `sayHello` function property to the objects.
+
+```js
+kristie.sayHello = () => {
+  console.log('Hi, my name is ' + kristie.name);
+};
+tim.sayHello = () => {
+  console.log('Hi, my name is ' + tim.name);
+};
+```
+
+This works, but is _not ideal_: the bodies of the `sayHello` functions are essentially the same; yet we had to duplicate pretty much the entire function, changing only the identifier `kristie` to say `tim` instead.
+
 ### Declaring a class
 
-A class can be thought of a family of objects, that all share certain traits and methods.
+A class can be thought of a family of objects, that all share certain properties and methods.
 
 ```js
 class Person {
@@ -123,9 +153,9 @@ class Person {
     console.log('Hi, my name is ' + this.name);
   }
 
-  changeAge(newAge) {
-    this.age = newAge;
-    console.log(this.name + ' is now ' + this.age + ' yo.');
+  birthday() {
+    this.age = this.age + 1;
+    console.log(this.name + ' is now ' + this.age + ' years old.');
   }
 }
 ```
@@ -163,7 +193,6 @@ me
 Changing the age of `berg` will not change the age of `me`.
 
 We can see that the `this` keyword specifies which person's age we are changing, namely the "current object/instance" itself.
-
 
 ## Set up React
 
@@ -205,8 +234,13 @@ Now look at the `ReactDOM.render()` call.
 ReactDOM.render(<h1>…</h1>, document.getElementById('root'));
 ```
 
-`ReactDOM.render` function takes in 2 things, a React element that we created, and an element from the page. 
-What it does is that it replaces the element with `id="root"` with the element in the first argument.
+The `ReactDOM.render` function takes in 2 things, a React element that we created, and an element from the page. 
+What it does is that it replaces the content of the `id="root"` _DOM element_ with the React element in the first argument.
+
+![ReactDOM.render before-after](images/reactdom-render.png)
+
+Initially, as it is in the HTML file, the `id="root"` element is empty, as shown on the left-hand side of the screenshot above.
+However, after the `ReactDOM.render()` function call, the `<h1>…</h1>` React element gets inserted into the root element, thus rendering the React element onto the page.
 
 ### Class components
 
@@ -218,16 +252,13 @@ Let's first create a _container_ for the entire app that includes the `<h1>` ele
 ```jsx
 class App extends React.Component {
   render() {
-    return (
-      <>
-        <h1>Hello world</h1>
-      </>
-    );
+    return <h1>Hello world</h1>;
   }
 }
 ```
 
-We see here that `App` is a class, but a bit special in that it is a `React.Component`.
+We see here that `App` is a class, but a bit special in that it has `extends React.Component`.
+This tells React that this class is a component.
 It has a `render` method that returns whatever we want to be on the page.
 
 ```diff
@@ -261,12 +292,8 @@ Let put `Tweet` into `App` so we can see it.
 ```diff
  class App extends React.Component {
    render() {
-     return (
-       <>
--        <h1>Hello world</h1>
-+        <Tweet />
-       </>
-     );
+-    return <h1>Hello world</h1>;
++    return <Tweet />;
    }
  }
 ```
@@ -290,11 +317,7 @@ class Tweet extends React.Component {
 
 class App extends React.Component {
   render() {
-    return (
-      <>
-        <Tweet tweet="I love De Neve" />
-      </>
-    );
+    return <Tweet tweet="I love De Neve" />;
   }
 }
 ```
@@ -310,25 +333,29 @@ We make clear that it is JavaScript by surrounding it with `{ }`.
 Let's render multiple tweets.
 
 ```jsx
-class App extends Component {
+class App extends React.Component {
   render() {
     return (
       <>
-        <Tweet tweet="I love De Neve. "/>
-        <Tweet tweet="I love Rende. "/>
-        <Tweet tweet="I hate BPlate. "/>
+        <Tweet tweet="I love De Neve" />
+        <Tweet tweet="I love Rende" />
+        <Tweet tweet="I hate BPlate" />
       </>
     );
   }
 }
 ```
 
+The odd `<>`–`</>` empty tags are special, in that they tell React that we are trying to render multiple elements together.
+This is necessary, as a JavaScript function can only return one value.
+The empty tags wrap all elements into a single return value.
+
 We can actually uses an array to help us store these tweets.
 
 ```jsx
-class App extends Component {
+class App extends React.Component {
   render() {
-    const tweets = ["I love Rende", "I hate BPlate"];
+    const tweets = ['I love De Neve', 'I love Rende', 'I hate BPlate'];
     const elements = [];
     for (const tweet of tweets) {
       elements.push(<Tweet tweet={tweet} />);

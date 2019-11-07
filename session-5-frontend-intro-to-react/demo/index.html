@@ -27,9 +27,16 @@
 
       class App extends React.Component {
         render() {
-          return <>
-            <Tweet tweet="I love De Neve" />
-          </>;
+          const tweets = ["I love De Neve", "I hate BPlate"];
+          const elements = [];
+          for (const tweet of tweets) {
+            elements.push(<Tweet tweet={tweet} />);
+          }
+          return (
+            <>
+              {elements}
+            </>
+          );
         }
       }
 
