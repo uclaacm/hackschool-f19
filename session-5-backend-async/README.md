@@ -7,7 +7,7 @@
 ## Resources
 
 **Slides**
-* [Session 5 Backend: Asynchronous Actions]()
+* [Session 5 Backend: Asynchronous Actions](tinyurl.com/hackschool19-w5)
 
 **ACM Membership Attendance Portal**
 * [Portal](https://members.uclaacm.com/login)
