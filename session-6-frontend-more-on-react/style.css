@@ -1,0 +1,39 @@
+.play-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 100vh;
+}
+
+.dialogue-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    width: 100vw;
+    margin-top: 10px;
+}
+
+.dialogue-image {
+    height: 100px;
+    width: 100px;
+}
+
+.dialogue-words {
+    height: 100%;
+    width: 80%;
+    background-color: lightgray;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.selected {
+    color: black;
+    background-color: lightgreen;
+}
+
+.unselected {
+    color: black;
+}
