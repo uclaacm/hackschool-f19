@@ -1,4 +1,4 @@
-# Hackschool Session 5: Introduction to Database
+# Hackschool Session 6: Introduction to Database
 
 **Location**: Boelter 5249, UCLA
 
