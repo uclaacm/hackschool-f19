@@ -26,7 +26,7 @@ To do this we will select the character we are creating dialogue for, and then i
 
 Go ahead and copy the following boilerplate code. 
 
-```
+```html
 <!DOCTYPE html>
 <html>
   <head>
