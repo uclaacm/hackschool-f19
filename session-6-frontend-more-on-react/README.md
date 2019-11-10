@@ -17,13 +17,7 @@
 * Component state
 * Using inputs
 * Callbacks and event handlers 
-* Making a simple application with a few components
-
-## Component state
-
-## Inputs
-
-## Callbacks 
+* Making a simple application with a few components and the above concepts
 
 ## A simple app using state, input, and callbacks
 
@@ -48,7 +42,7 @@ Go ahead and copy the following boilerplate code.
     <div id="root"></div>
     <script type="text/babel">
     
-      class App extends React.Component {
+      class PlayGenerator extends React.Component {
         render() {
           return (
             <>
@@ -56,7 +50,7 @@ Go ahead and copy the following boilerplate code.
           );
         }
       }
-      ReactDOM.render(<App />, document.getElementById('root'));
+      ReactDOM.render(<PlayGenerator />, document.getElementById('root'));
     </script>
     <!--
       Note: this page is a great way to try React but it's not suitable for production.
@@ -77,18 +71,17 @@ Go ahead and copy the following boilerplate code.
 
 Last week we saw we can have a list of strings and then use a for loop to create a list of Tweet components. This was
 happening inside of the render function. But what if we wanted our elements to update on the screen whenever a new element was added?
-We can do this with **state**. With state, we can store certain properties that belong to the component. When the state object changes,
-the component's render function is called. 
+We can do this with **state**. With state, we can store certain properties that belong to the component. When the state object changes, the component's render function is called. 
 
 We can initialize state in the component's constructor. Remember that the constructor happens when the component is first created.
-```
-        constructor() {
-            super();
-            this.state = {
-                playLines: [],
-                selectedCharacter: null
-            };
-        } 
+```js
+  constructor() {
+      super();
+      this.state = {
+          playLines: [],
+          selectedCharacter: null
+      };
+  } 
 ```
 
 To understand super(); you need to learn about object orientated programming. Feel free to look it up. We initialize playLines 
@@ -96,14 +89,16 @@ to an empty list because our play is empty right now. Also, we don't have a sele
 keeping this in the state because we want the visuals to update every time a new play line is added and we want to make sure
 we update the character who is speaking that line. 
 
-```
-        render() {
-          return (
-            <div className="play-container">
-             {this.state.playLines.map(line => <DialogueLine key={line} content={line} />)}
-            </div>
-          );
-        }
+Next, let's get our play lines onto the page. 
+
+```jsx
+  render() {
+    return (
+      <div className="play-container">
+       {this.state.playLines.map(line => <DialogueLine key={line} content={line} />)}
+      </div>
+    );
+  }
 ```
 
 We can use map here in order to take all of the lines we have in this.state.playLines to create DialogueLines. We create a 
@@ -111,24 +106,24 @@ DialogueLine component here because we are going to create our own unique groupi
 
 So, lets add a DialogueLine component to our project.
 
-```
-      class DialogueLine extends React.Component {
-        render() {
-          return (
-            <div className="dialogue-container">
-                <div className="dialogue-words">
-                    <p>{this.props.content}</p>
-                    <br />
-                </div> 
-            </div>    
-          );
-        }
-      }
+```jsx
+  class DialogueLine extends React.Component {
+    render() {
+      return (
+        <div className="dialogue-container">
+            <div className="dialogue-words">
+                <p>{this.props.content}</p>
+                <br />
+            </div> 
+        </div>    
+      );
+    }
+  }
 ```
 
 Here are the styles for the 3 classes we just saw. 
 
-```
+```css
 .play-container {
     display: flex;
     flex-direction: column;
@@ -161,37 +156,39 @@ We can test this out by adding some strings to our playList property in the cons
 
 ### Adding dialogue
 
-Next, we can create an input so that we can spontaneously add lines to our play. Let's create an input component to do this. 
+Next, we can create an input so that we can spontaneously add lines to our play. We will create an input component to do this. 
 
-First, lets add this input component to our App and decide what to do with the input we will get.
-We want to be able to add lines to our play visual and in order to do this,
-we can pass a callback to DialogueInput. 
+First, lets add this input component to our PlayGenerator and decide what to do with the input we will get.
+We want to be able to add lines to our play visual and in order to do this, we can pass a function to DialogueInput as a props. 
 
-```
-        render() {
-          return (
-            <div className="play-container">
-             {this.state.playLines.map(line => <DialogueLine key={line} content={line} />)}
-             <DialogueInput addLineToPlay={this.addLineToPlay}/>
-            </div>
-          );
-        }
-      }
+```jsx
+  render() {
+    return (
+      <div className="play-container">
+       {this.state.playLines.map(line => <DialogueLine key={line} content={line} />)}
+       <DialogueInput addLineToPlay={this.addLineToPlay}/>
+      </div>
+    );
+  }
 ```
 
-So, when a user inputs text and presses submit, we will add the line to our
-script by passing that text back up to App so that we can update this.state.playLines. 
+This function is a callback. Callbacks are a function that are run at a later time. 
+This means that the parent component gave the child component this function to be used later.
 
-```
+The function will allow the child to pass information back up to the parent, so that it may do what it wishes with it.
+In this case, we are going to pass up the inputted text back up to PlayGenerator from the input component. 
+
+So, we want it so that when a user inputs text and presses submit, we will add the line to our
+play by passing that text back up to PlayGenerator so that we can update this.state.playLines. By passing addLineToPlay to DialogueInput, we can do exactly that in the DialogueInput component later. 
+
+
+Let's go ahead write the functionality for addLineToPlay and bind it.
+
+```jsx
       class App extends React.Component {
         constructor() {
-            super();
-            this.state = {
-                playLines: [],
-                selectedCharacter: null
-            };
-
-            this.addLineToPlay = (e) => { this.addLineToPlay(e); };
+            ...
+            this.addLineToPlay = (e) => { this.addLineToPlay(e); }; // add this line to constructor 
         } 
 
         addLineToPlay(e) {
@@ -201,46 +198,37 @@ script by passing that text back up to App so that we can update this.state.play
         }
 
         render() {
-          return (
-            <div className="play-container">
-             {this.state.playLines.map(line => <DialogueLine key={line} character={line.character} content={line.content} />)}
-             <DialogueInput addLineToPlay={this.addLineToPlay}/>
-            </div>
-          );
-        }
+          ...
       }
 ```
 
-bind(this); creates a new function that sets its this to the current value. Consequently, the current instance of the component 
-is the value referred to by this. 
+Let's digest all of what we just did.
 
-We can see we are passing in the function addLineToPlay to the props of DialogueInput. This function is a callback.  Callbacks
-are a function that are run at a later time. 
-This means that the parent component gave the child component this function to be used later.
 
-The function will allow the child to pass information back up to the parent, so that it may do what it wishes with it.
-In this case, we are going to pass up the inputted text back up to the play generator from the input component. 
+bind(this); creates a new function that sets its this to the current value. Consequently, the current instance of the component is the value referred to by this. 
 
-We can see we add the line to the array of lines in the state object. Take note of the syntax. We use setState and do not
-access this.state directly. Also, because we are using an array, we have to use the spread syntax in order to create a new 
-array with the new text and store it into state. 
+
+We can see we add the line to the array of lines in the state object. Take note of the syntax.
+* We use setState and do not access this.state directly because setState will actually cause render to be called again. 
+* Because we are using an array, we have to use the spread syntax in order to create a new array with the new line and store it into state. We cannot mutate the existing array in state.
+* We use prevState because we are accessing an old value of the state, and with setState's asynchronous and batching behavior, this is the safe way to do this. 
 
 Here is the DialogueInput component.
 
-```
-      class DialogueInput extends React.Component {
-        render() {
-          return (
-            <form>
-                <label>
-                     Enter a beautiful line:
-                    <input type="text" name="content" />
-                </label>
-                <input type="submit" value="Submit" />
-            </form>
-          );
-        }
-      }
+```jsx
+  class DialogueInput extends React.Component {
+    render() {
+      return (
+        <form>
+            <label>
+                 Enter a beautiful line:
+                <input type="text" name="content" />
+            </label>
+            <input type="submit" value="Submit" />
+        </form>
+      );
+    }
+  }
 ```
 
 This gives us a basic form but we aren't doing anything with it right now. In React, the component handles what to do with any 
@@ -249,7 +237,7 @@ user hits submit.
 
 Change the existing DialogueInput to look like the following. 
 
-```
+```jsx
       class DialogueInput extends React.Component {
         constructor(props) {
             super(props);
@@ -284,56 +272,61 @@ Change the existing DialogueInput to look like the following.
 
 Let's digest a few of the lines we see.
 
+
 Here event.preventDefault() just prevents the page from refreshing. 
 
 
-We can see they are passed into the onChange and onSubmit events as event handlers. Event handlers are a type of callback.
-So, when the component is rendered, the functions are not called yet. They are kind
+We can see handleChange and handleSubmit are passed into the onChange and onSubmit events as event handlers. Event handlers are a type of callback. So, when the component is rendered, the functions are not called yet. They are kind
 of stored away for later use if those two events happen. 
 
-We can see in handleSubmit, we are using the callback function we previously saw in App. 
+Since we are passing in handleChange and handleSubmit to the form and input, we must bind them. 
+
+We can see in handleSubmit, we are using the callback function we previously saw in PlayGenerator. 
 
 So effectively, as we interact with the input, handleChange is called with whatever was typed in. This is then stored 
-in the component's state object. Later, if we hit submit, then handleSubmit is called and we pass the text back up to App.
+in the component's state object. Later, if we hit submit, then handleSubmit is called and we pass the text back up to PlayGenerator where it updates the state and adds the new line.
 
 
 ### Adding characters
 
 So we generated lines but usually a play and script has multiple characters. Let's go ahead and add the ability to choose
-a specific character that we want to 'speak' the lines. 
+a specific character that we want to 'speak' the lines. We can have it so that when we press a button, we set the id/name of that button as the selectedCharacter.
 
-Let's add some characters and choose them as the 'current' speaker by using buttons. 
+```js
+  setCharacter(e) {
+      this.setState({
+          selectedCharacter: e.target.id
+      });
+  }
 
 ```
-    setCharacter(e) {
-        this.setState({
-            selectedCharacter: e.target.id
-        });
-    }
 
-    render() {
-      const characters = ["Chimmy", "Shooky", "Koya"]
-      return (
-        <div className="play-container">
+Let's also add some characters and choose them as the 'current' speaker of the to-be new line by using buttons. 
+
+```jsx
+
+  render() {
+    const characters = ["Chimmy", "Shooky", "Koya"]
+    return (
+      <div className="play-container">
          {this.state.playLines.map(line => <DialogueLine key={line} content={line} />)}
          {characters.map(name => 
-         <button id={name} onClick={(e) => this.setCharacter(e)} className={name == this.state.selectedCharacter ? "selected" : "unselected"}>
-          {name}
+         <button id={name} onClick={(e) => 
+         this.setCharacter(e)} className={name == this.state.selectedCharacter ? "selected" : "unselected"}>
+           {name}
          </button>)}
          <DialogueInput addLineToPlay={this.addLineToPlay}/>
-        </div>
-      );
-    }
+      </div>
+    );
+  }
 ```
 
-Here we created buttons for all of the characters we want in this play. When the button is clicked, we will set the state object's 
-selectedCharacter to the character name. We can see for the style of the button, we have a ternary statement happening.
-Basically, if the most recent clicked on character button id  matches the button id that is about about to be created,
-we want to make it seem selected. So we give it a selected style while all the other buttons get an unselected style.
+Here we created buttons for all of the characters we want in this play. When the button is clicked, we will set the state object's selectedCharacter to the character name. We can see for the style of the button, we use something called a ternary operator.
+Basically, if the most recent clicked on character button id matches the button id of the button that is about about to be render, we want to make it seem selected, otherwise we want it to seem unselected. So, we give it a selected style while all the other buttons get an unselected style.
 
 Here's the styles.
 
-```
+```css
 .selected {
     color: black;
     background-color: lightgreen;
@@ -348,9 +341,9 @@ Here's the styles.
 
 Now that we can have a selectedCharacter, let's add the name to each DialogueLine. We can do this by checking who
 the selectedCharacter is as we add the line to the script. We change an object in the array to be a dictionary instead of just
-the line string so that we can have an object to have character and content properties tied together. 
+the line string so that we can have an object that has character and content properties grouped together. 
 
-```
+```js
   addLineToPlay(e) {
       const fullLine = {
           character: this.state.selectedCharacter,
@@ -364,7 +357,7 @@ the line string so that we can have an object to have character and content prop
 
 We can now pass this character information to DialogueLine. 
 
-```
+```jsx
 {this.state.playLines.map(line => <DialogueLine key={line} character={line.character} content={line.content} />)}
 
 ```
@@ -372,7 +365,7 @@ We can now pass this character information to DialogueLine.
 Let's update our DialogueLine to show the character name. Also, let's go ahead and add an image to our DialogueLine.
 We can create a dictionary of images and then choose the correct image link in the dictionary by matching the character name. 
 
-```
+```jsx
 
   render() {
     const allImages = {
@@ -396,7 +389,7 @@ We can create a dictionary of images and then choose the correct image link in t
 
 Here's the style. 
 
-```
+```css
 .dialogue-image {
     height: 100px;
     width: 100px;
@@ -407,6 +400,13 @@ Here's the style.
 
 Now, we have a fully functioning script/play generator where we can make up stories with whatever characters we want! 
 
+
+## Mini project
+
+Right now our project has 3 set characters in the play. 
+We can make our PlayGenerator more flexible by allowing users to add any character they want at any point in time to the play. Create the functionality so that that is possible. 
+
+This probably involves creating a way to input character names and image urls. Try it out! 
 
 
 
