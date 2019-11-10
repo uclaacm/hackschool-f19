@@ -27,7 +27,7 @@
         }
 
         handleSubmit(event) {
-            this.props.addLineToPlay(this.state.value)
+            this.props.addLineToPlay(this.state.value);
             event.preventDefault(); 
         }
             
@@ -64,18 +64,18 @@
         }
       }
       class App extends React.Component {
-        constructor(props) {
-            super(props);
+        constructor() {
+            super();
             this.state = {
                 playLines: [],
                 selectedCharacter: null
             };
 
-            this.addLineToPlay = (e) => { this.addLine(e); };
+            this.addLineToPlay = this.addLineToPlay.bind(this);
             this.setCharacter = this.setCharacter.bind(this);
         } 
 
-        addLine(e) {
+        addLineToPlay(e) {
             const fullLine = {
                 character: this.state.selectedCharacter,
                 content: e
