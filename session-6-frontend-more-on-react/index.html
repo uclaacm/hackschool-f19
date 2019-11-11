@@ -14,32 +14,31 @@
     <script type="text/babel">
       
       class DialogueInput extends React.Component {
-        constructor(props) {
-            super(props);
-            this.state = {value: ''};
+        constructor() {
+          super();
+          this.state = {value: ''};
 
-            this.handleChange = this.handleChange.bind(this);
-            this.handleSubmit = this.handleSubmit.bind(this);
+          this.handleChange = (e) => { this.changeValue(e); };
+          this.handleSubmit = () => { this.clickedSubmit(); };
         }
 
-        handleChange(event) {
-            this.setState({value: event.target.value});
+        changeValue(event) {
+          this.setState({value: event.target.value});
         }
 
-        handleSubmit(event) {
-            this.props.addLineToPlay(this.state.value);
-            event.preventDefault(); 
+        clickedSubmit() {
+          this.props.addLineToPlay(this.state.value);
         }
             
         render() {
           return (
-            <form onSubmit={this.handleSubmit}>
-                <label>
-                     Enter a beautiful line:
-                    <input type="text" value={this.state.value} onChange={this.handleChange} />
-                </label>
-                <input type="submit" value="Submit" />
-            </form>
+            <div>
+              <label>
+                Enter a beautiful line:
+                <input type="text" value={this.state.value} onChange={this.handleChange} />
+              </label>
+              <button onClick={this.handleSubmit}> Submit </button>
+            </div>
           );
         }
       }
@@ -47,64 +46,68 @@
       class DialogueLine extends React.Component {
         render() {
           const allImages = {
-              "Chimmy": "https://cdn.shopify.com/s/files/1/0231/6137/2752/products/1200_chimmy_8809573079480-1_2000x.jpg?v=1565212917",
-              "Koya": "https://www.bt21.com/im/character/bt21/koya.gif",
-              "Shooky": "https://cdn130.picsart.com/293144906007211.png?r1024x1024"
+            "Chimmy": "https://cdn.shopify.com/s/files/1/0231/6137/2752/products/1200_chimmy_8809573079480-1_2000x.jpg?v=1565212917",
+            "Koya": "https://www.bt21.com/im/character/bt21/koya.gif",
+            "Shooky": "https://cdn130.picsart.com/293144906007211.png?r1024x1024"
           }
+
           return (
             <div className="dialogue-container">
-                <img className="dialogue-image" src={allImages[this.props.character]}/>
-                <div className="dialogue-words">
-                    <h3>{this.props.character}</h3>
-                    <p>{this.props.content}</p>
-                    <br />
-                </div> 
+              <img className="dialogue-image" src={allImages[this.props.character]}/>
+              <div className="dialogue-words">
+                <h3>{this.props.character}</h3>
+                <p>{this.props.content}</p>
+                <br />
+              </div> 
             </div>    
           );
         }
       }
+
       class PlayGenerator extends React.Component {
         constructor() {
-            super();
-            this.state = {
-                playLines: [],
-                selectedCharacter: null
-            };
+          super();
+          this.state = {
+              playLines: [],
+              selectedCharacter: null
+          };
 
-            this.addLineToPlay = this.addLineToPlay.bind(this);
-            this.setCharacter = this.setCharacter.bind(this);
+          this.addLineToPlay = (content) => { this.addLine(content); };
+          this.changeCharacter = (e) => { this.setCharacter(e); };
         } 
 
-        addLineToPlay(e) {
-            const fullLine = {
-                character: this.state.selectedCharacter,
-                content: e
-            }
-            this.setState(prevState => ({
-                playLines: [...prevState.playLines, fullLine]
-            }));
+        addLine(content) {
+          const fullLine = {
+            character: this.state.selectedCharacter,
+            content: content
+          }
+          const newLines =  [...this.state.playLines, fullLine];
+          this.setState({ 
+            playLines: newLines
+          });
         }
 
         setCharacter(e) {
-            this.setState({
-                selectedCharacter: e.target.id
-            });
+          this.setState({
+            selectedCharacter: e.target.id
+          });
         }
 
         render() {
           const characters = ["Chimmy", "Shooky", "Koya"]
           return (
             <div className="play-container">
-             {this.state.playLines.map(line => <DialogueLine key={line} character={line.character} content={line.content} />)}
-             {characters.map(name => 
-             <button id={name} onClick={(e) => this.setCharacter(e)} className={name == this.state.selectedCharacter ? "selected" : "unselected"}>
-              {name}
-             </button>)}
-             <DialogueInput addLineToPlay={this.addLineToPlay}/>
+              {this.state.playLines.map(line => <DialogueLine key={line} character={line.character} content={line.content} />)}
+              {characters.map(name => 
+              <button id={name} onClick={(e) => this.changeCharacter(e)} className={name == this.state.selectedCharacter ? "selected" : "unselected"}>
+                {name}
+              </button>)}
+              <DialogueInput addLineToPlay={this.addLineToPlay}/>
             </div>
           );
         }
       }
+
       ReactDOM.render(<PlayGenerator />, document.getElementById('root'));
     </script>
     <!--
