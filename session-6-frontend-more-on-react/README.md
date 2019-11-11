@@ -202,7 +202,7 @@ play by passing that text back up to PlayGenerator so that we can update this.st
 Let's go ahead write the functionality for addLineToPlay and bind it.
 
 ```jsx
-  class App extends React.Component {
+  class PlayGenerator extends React.Component {
     constructor() {
         ...
         this.addLineToPlay = (content) => { this.addLine(content); }; // add this line to constructor 
@@ -217,6 +217,7 @@ Let's go ahead write the functionality for addLineToPlay and bind it.
 
     render() {
       ...
+    }
   }
 ```
 
@@ -300,6 +301,8 @@ in the component's state object. Later, if we hit submit, then handleSubmit is c
 So we generated lines but usually a play and script has multiple characters. Let's go ahead and add the ability to choose
 a specific character that we want to 'speak' the lines. We can have it so that when we press a button, we set the id/name of that button as the selectedCharacter.
 
+Add the following to PlayGenerator.
+
 ```js
 
   constructor() {
@@ -356,6 +359,8 @@ Here's the styles.
 Now that we can have a selectedCharacter, let's add the name to each DialogueLine. We can do this by setting who
 the selectedCharacter is as we add the line to the script. We change an object in the array to be an object with a  character and content value instead of just the content string so that we can have an object that has character and content properties grouped together. 
 
+Add the following to PlayGenerator.
+
 ```js
   addLine(content) {
     const fullLine = {
@@ -378,6 +383,8 @@ We can now pass this character information to DialogueLine.
 
 Let's update our DialogueLine to show the character name. Also, let's go ahead and add an image to our DialogueLine.
 We can create an object of character images and then choose the correct image link in the dictionary by matching the character name. 
+
+Add the following to DialogueLine.
 
 ```jsx
 
