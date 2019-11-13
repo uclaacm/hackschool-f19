@@ -199,7 +199,7 @@ So, we want it so that when a user inputs text and presses submit, we will add t
 play by passing that text back up to PlayGenerator so that we can update this.state.playLines. By passing addLineToPlay to DialogueInput, we can do exactly that in the DialogueInput component later. 
 
 
-Let's go ahead write the functionality for addLineToPlay and bind it.
+Let's go ahead write the functionality for addLineToPlay.
 
 ```jsx
   class PlayGenerator extends React.Component {
