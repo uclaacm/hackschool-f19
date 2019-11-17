@@ -84,11 +84,28 @@ If we want to define new types of 'elements' – which we'll call components –
 ### Objective
 Create a react component that takes in at least one prop and use that component at least twice on your page.  In my example, my component had the name of my card and a picture of it.
 
+Also make an `<App/>` component to display your entire page.  In the `constructor` for `App`, set the state equal to a list of objects representing the data for your smaller react components (you should be able to pass this data in for your props).  For now, hard code all of your objects.  My `App` constructor looked like this:
+```javascript
+constructor(){
+    super();
+    this.state = {cards: [
+        {
+            name:"Kykar, Wind's Fury", 
+            url: "https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=466966&type=card"
+        },
+        {
+            name:"Niv-Mizzet, Parun", 
+            url: "https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=452942&type=card"
+        }
+    ]}
+}
+```
+
 <img src="assets/react_page.png">
 
 ### Tips
-* [Our React workshop]()
-* I suggest making an 'App' component for everything and a smaller component that you will reuse in your page
+* [Our React workshop](https://github.com/uclaacm/hackschool-f19/tree/master/session-5-frontend-intro-to-react)
+* [More on React: App Constructor Example](https://github.com/uclaacm/hackschool-f19/tree/master/session-6-frontend-more-on-react#showing-dialogue)
 * Our React component shouldn't need too many bells and whistles.  We can just use a `class` that `extends React.Component`.  You'll want a `render()` function that `return`s the jsx (which is like html with some javascript) that makes up your 'element'.  
 * `render()` can only return one element, so you can wrap your html like so: `<>YOUR_HTML</>` or like so `<div>YOUR_HTML</div>`
 
