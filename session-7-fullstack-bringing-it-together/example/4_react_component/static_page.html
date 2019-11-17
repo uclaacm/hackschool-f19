@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <link rel="stylesheet" href="http://localhost:3000/style.css">
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+        class Card extends React.Component{
+            render(){
+                return(
+                    <div className='card'>
+                        <h3>{this.props.name}</h3>
+                        <img className='card-img' src={this.props.url}/>
+                    </div>
+                );
+            }
+        }
+
+        ReactDOM.render(
+            <>
+            <h1>Tim's Favorite Magic Cards</h1>
+            <div className='card-container'>
+                <Card name = "Kykar, Wind's Fury" url="https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=466966&type=card"/>
+                <Card name = "Niv-Mizzet, Parun" url="https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=452942&type=card"/>
+                <Card name = "Ral, Storm Conduit" url="https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=461138&type=card"/>
+                <Card name = "Thousand-Year Storm" url="https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=452957&type=card"/>
+                <Card name = "Expansion // Explosion" url="https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=452974&type=card"/>
+                <Card name = "Narset's Reversal" url="https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=460989&type=card"/>
+                <Card name = "Frantic Search" url="https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=456653&type=card"/>
+                <Card name = "Fiery Confluence" url="https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=446834&type=card"/>
+            </div>
+            </>,
+            document.getElementById('root')
+        );
+
+    </script>
+    <!--
+      Note: this page is a great way to try React but it's not suitable for production.
+      It slowly compiles JSX with Babel in the browser and uses a large development build of React.
+
+      Read this section for a production-ready setup with JSX:
+      https://reactjs.org/docs/add-react-to-a-website.html#add-jsx-to-a-project
+
+      In a larger project, you can use an integrated toolchain that includes JSX instead:
+      https://reactjs.org/docs/create-a-new-react-app.html
+
+      You can also use React without JSX, in which case you can remove Babel:
+      https://reactjs.org/docs/react-without-jsx.html
+    -->
+  </body>
+</html>
+
