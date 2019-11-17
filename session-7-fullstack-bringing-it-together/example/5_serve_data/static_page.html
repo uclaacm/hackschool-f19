@@ -14,40 +14,6 @@
     <div id="root"></div>
     <script type="text/babel">
         //This is a list of cards for the *optional* way of displaying them below
-        const cards = [
-            {
-                name:"Kykar, Wind's Fury", 
-                url: "https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=466966&type=card"
-            },
-            {
-                name:"Niv-Mizzet, Parun", 
-                url: "https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=452942&type=card"
-            },
-            {
-                name: "Ral, Storm Conduit", 
-                url: "https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=461138&type=card"
-            },
-            {
-                name: "Thousand-Year Storm", 
-                url: "https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=452957&type=card"
-            },
-            {
-                name: "Expansion // Explosion", 
-                url: "https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=452974&type=card"
-            },
-            {
-                name: "Narset's Reversal", 
-                url: "https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=460989&type=card"
-            },
-            {
-                name: "Frantic Search", 
-                url: "https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=456653&type=card"
-            },
-            {
-                name: "Fiery Confluence", 
-                url: "https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=446834&type=card"
-            },
-        ]
         class Card extends React.Component{
             render(){
                 return(
@@ -60,22 +26,52 @@
         }
 
         class App extends React.Component{
+            constructor(props){
+                super(props);
+                this.state = {cards: [
+                    {
+                        name:"Kykar, Wind's Fury", 
+                        url: "https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=466966&type=card"
+                    },
+                    {
+                        name:"Niv-Mizzet, Parun", 
+                        url: "https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=452942&type=card"
+                    },
+                    {
+                        name: "Ral, Storm Conduit", 
+                        url: "https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=461138&type=card"
+                    },
+                    {
+                        name: "Thousand-Year Storm", 
+                        url: "https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=452957&type=card"
+                    },
+                    {
+                        name: "Expansion // Explosion", 
+                        url: "https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=452974&type=card"
+                    },
+                    {
+                        name: "Narset's Reversal", 
+                        url: "https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=460989&type=card"
+                    },
+                    {
+                        name: "Frantic Search", 
+                        url: "https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=456653&type=card"
+                    },
+                    {
+                        name: "Fiery Confluence", 
+                        url: "https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=446834&type=card"
+                    },
+                ]
+                }
+            }
+            
             //The cards.map line is an optional way of rendering multiple components
             //I used both ways (so the cards will render twice, once using each way)
             render(){
                 return(<>
                 <h1>Tim's Favorite Magic Cards</h1>
                 <div className='card-container'>
-                    {cards.map((card) => <Card name = {card.name} url = {card.url} key = {card.url}/>)}
-                    
-                    <Card name = "Kykar, Wind's Fury" url="https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=466966&type=card"/>
-                    <Card name = "Niv-Mizzet, Parun" url="https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=452942&type=card"/>
-                    <Card name = "Ral, Storm Conduit" url="https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=461138&type=card"/>
-                    <Card name = "Thousand-Year Storm" url="https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=452957&type=card"/>
-                    <Card name = "Expansion // Explosion" url="https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=452974&type=card"/>
-                    <Card name = "Narset's Reversal" url="https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=460989&type=card"/>
-                    <Card name = "Frantic Search" url="https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=456653&type=card"/>
-                    <Card name = "Fiery Confluence" url="https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=446834&type=card"/>
+                    {this.state.cards.map((card) => <Card name = {card.name} url = {card.url} key = {card.url}/>)}
                 </div>
                 </>)
             }
