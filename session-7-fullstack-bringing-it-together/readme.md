@@ -8,7 +8,7 @@
 ## Resources
 
 **Slides**
-* [Session 7 Full Stack TODO]()
+* [Session 7 Full Stack](tinyurl.com/hackschool19-w8)
 
 **ACM Membership Attendance Portal**
 * [Portal](https://members.uclaacm.com/login)
