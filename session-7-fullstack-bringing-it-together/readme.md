@@ -137,7 +137,7 @@ What makes webpages very cool is the ability to get data from the backend. There
 
 ### Objective
 
-Let's do half of the job. Try creating an enpoint that returns an array of objects that you create on your backend. For now, it will return the same list every time. You can create it globally (outside of any methods at the top of your file). The objects should be relevant to your page! Here's an example that I used.
+Let's do half of the job. Try creating an endpoint that returns an array of objects that you create on your backend. For now, it will return the same list every time. You can create it globally (outside of any methods at the top of your file). The objects should be relevant to your page! Here's an example that I used.
 
 ```js
 const cards = [
