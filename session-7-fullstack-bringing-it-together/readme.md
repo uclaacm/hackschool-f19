@@ -235,4 +235,119 @@ class App extends React.Component {
 }
 ```
 
-Why don't we just fetch our data inside of the constructor? We could do this and it would get the intended results, but it is not best practice. One of the principles of React is that the constructor and render should be "pure." This means that all it does is take in some props and state and outputs a component. It should not cause any other side effects to happen, such as an API request.
+## Making a POST request with fetch
+
+First let's make an endpoint that allows us to change what cards are on the server. In `index.js`, add:
+
+```js
+app.post("/card", (req, res) => {
+  cards.push(req.body);
+});
+```
+
+In our example, we have an array called `cards` in `index.js` where we store an array that looks like this:
+
+```js
+const cards = [
+  {
+    name: "Kykar, Wind's Fury",
+    url:
+      "https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=466966&type=card"
+  },
+  {
+    name: "Niv-Mizzet, Parun",
+    url:
+      "https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=452942&type=card"
+  }
+];
+```
+
+We assume that `req.body` (the request body) will be an object with the structure
+
+```js
+{
+  name: "Niv-Mizzet, Parun",
+  url:
+    "https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=452942&type=card"
+}
+```
+
+So what the code above does is adds this new card object to our array of card objects.
+
+Now let's add a form on the frontend so the user can input a card.
+
+```js
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = { cards: [], name: "", url: "" };
+  }
+
+  // componentDidMount here
+
+  updateName = e => {
+    this.setState({
+      name: e.target.value
+    });
+  };
+
+  updateUrl = e => {
+    this.setState({
+      url: e.target.value
+    });
+  };
+
+  render() {
+    const cards = this.state.cards;
+    return (
+      <>
+        <h1>Tim's Favorite Magic Cards</h1>
+        <div>
+          <div>
+            Card name:
+            <input onChange={this.updateName} value={this.state.name} />
+          </div>
+          <div>
+            Image URL:
+            <input onChange={this.updateUrl} value={this.state.url} />
+          </div>
+          <button>Save!</button>
+        </div>
+        {/* .. more stuff below*/}
+      </>
+    );
+  }
+}
+```
+
+Now we should have two input fields that the user can type in.
+The last thing is to make a POST request when the user clicks the save button.
+
+```js
+// Add this function to the App component
+newCard = async () => {
+  const { name, url } = this.state;
+
+  // JSON.stringify turns a JavaScript object into a string
+  fetch("/card", {
+    method: "POST",
+    headers: new Headers({
+      "Content-Type": "application/json"
+    }),
+    body: JSON.stringify({ name, url })
+  });
+
+  // Reset the input fields
+  this.setState({ name: "", url: "" });
+
+  // Get the cards again
+  const response = await fetch("/cards");
+  const responseCards = await response.json();
+  this.setState({ cards: responseCards });
+};
+```
+
+```js
+// Update the button onClick handler
+<button onClick={this.newCard}>Save!</button>
+```
