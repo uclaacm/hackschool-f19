@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <link rel="stylesheet" href="http://localhost:3000/style.css" />
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      class Card extends React.Component {
+        render() {
+          return (
+            <div className="card">
+              <h3>{this.props.name}</h3>
+              <img className="card-img" src={this.props.url} />
+            </div>
+          );
+        }
+      }
+
+      class CardForm extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = { name: "", url: "" };
+        }
+      }
+
+      class App extends React.Component {
+        constructor() {
+          super();
+          this.state = { cards: [], name: "", url: "" };
+        }
+
+        async componentDidMount() {
+          const response = await fetch("/cards");
+          const responseCards = await response.json();
+          this.setState({ cards: responseCards });
+        }
+
+        updateName = e => {
+          this.setState({
+            name: e.target.value
+          });
+        };
+
+        updateUrl = e => {
+          this.setState({
+            url: e.target.value
+          });
+        };
+
+        newCard = async () => {
+          const { name, url } = this.state;
+
+          fetch("/card", {
+            method: "POST",
+            headers: new Headers({
+              "Content-Type": "application/json"
+            }),
+            body: JSON.stringify({ name, url })
+          });
+
+          this.setState({ name: "", url: "" });
+
+          const response = await fetch("/cards");
+          const responseCards = await response.json();
+          this.setState({ cards: responseCards });
+        };
+
+        render() {
+          const cards = this.state.cards;
+          return (
+            <>
+              <h1>Tim's Favorite Magic Cards</h1>
+              <div>
+                <div>
+                  Card name:
+                  <input onChange={this.updateName} value={this.state.name} />
+                </div>
+                <div>
+                  Image URL:
+                  <input onChange={this.updateUrl} value={this.state.url} />
+                </div>
+                <button onClick={this.newCard}>Save!</button>
+              </div>
+              <div className="card-container">
+                {cards.map(card => (
+                  <Card name={card.name} url={card.url} key={card.url} />
+                ))}
+              </div>
+            </>
+          );
+        }
+      }
+
+      ReactDOM.render(<App />, document.getElementById("root"));
+    </script>
+    <!--
+      Note: this page is a great way to try React but it's not suitable for production.
+      It slowly compiles JSX with Babel in the browser and uses a large development build of React.
+
+      Read this section for a production-ready setup with JSX:
+      https://reactjs.org/docs/add-react-to-a-website.html#add-jsx-to-a-project
+
+      In a larger project, you can use an integrated toolchain that includes JSX instead:
+      https://reactjs.org/docs/create-a-new-react-app.html
+
+      You can also use React without JSX, in which case you can remove Babel:
+      https://reactjs.org/docs/react-without-jsx.html
+    -->
+  </body>
+</html>
