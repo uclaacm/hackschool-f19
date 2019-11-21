@@ -2,7 +2,6 @@ const express = require("express");
 const app = express();
 app.use(express.json());
 
-//We don't usually do this, we'll learn how to not do this next.
 const cards = [
   {
     name: "Kykar, Wind's Fury",
