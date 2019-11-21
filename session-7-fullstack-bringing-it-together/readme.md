@@ -127,6 +127,8 @@ constructor(){
 ### Tips
 
 - [Our React workshop](https://github.com/uclaacm/hackschool-f19/tree/master/session-5-frontend-intro-to-react)
+- [React boilerplate](https://raw.githubusercontent.com/reactjs/reactjs.org/master/static/html/single-file-example.html)
+  - You can copy this and put `<App/>` where `<h1>Hello, world!</h1>` is.  Then write an `App` component that simply renders your entire page.  If that works, then try writing a component for a repeated element on your page.
 - [More on React: App Constructor Example](https://github.com/uclaacm/hackschool-f19/tree/master/session-6-frontend-more-on-react#showing-dialogue)
 - Our React component shouldn't need too many bells and whistles. We can just use a `class` that `extends React.Component`. You'll want a `render()` function that `return`s the jsx (which is like html with some javascript) that makes up your 'element'.
 - `render()` can only return one element, so you can wrap your html like so: `<>YOUR_HTML</>` or like so `<div>YOUR_HTML</div>`
