@@ -130,6 +130,6 @@ const cards = [
 
 ### Tips
 * Use `res.json(*your array/json*)`
-* Remember `app.use(express.json());` at the top of your code
+* Remember `app.use(express.json());` at the top of your code (this is needed for sending JSON to the server which we may do later)
 
 ## Fetch: Sending and Requesting Data

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>Hello World</title>
-    <link rel="stylesheet" href="http://localhost:3000/style.css">
+    <link rel="stylesheet" href="/style.css">
     <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
     
@@ -24,20 +24,26 @@
             }
         }
 
+        class App extends React.Component{
+            render(){
+                return <>
+                <h1>Tim's Favorite Magic Cards</h1>
+                <div className='card-container'>
+                    <Card name = "Kykar, Wind's Fury" url="https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=466966&type=card"/>
+                    <Card name = "Niv-Mizzet, Parun" url="https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=452942&type=card"/>
+                    <Card name = "Ral, Storm Conduit" url="https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=461138&type=card"/>
+                    <Card name = "Thousand-Year Storm" url="https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=452957&type=card"/>
+                    <Card name = "Expansion // Explosion" url="https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=452974&type=card"/>
+                    <Card name = "Narset's Reversal" url="https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=460989&type=card"/>
+                    <Card name = "Frantic Search" url="https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=456653&type=card"/>
+                    <Card name = "Fiery Confluence" url="https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=446834&type=card"/>
+                </div>
+                </>
+            }
+        }
+
         ReactDOM.render(
-            <>
-            <h1>Tim's Favorite Magic Cards</h1>
-            <div className='card-container'>
-                <Card name = "Kykar, Wind's Fury" url="https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=466966&type=card"/>
-                <Card name = "Niv-Mizzet, Parun" url="https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=452942&type=card"/>
-                <Card name = "Ral, Storm Conduit" url="https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=461138&type=card"/>
-                <Card name = "Thousand-Year Storm" url="https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=452957&type=card"/>
-                <Card name = "Expansion // Explosion" url="https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=452974&type=card"/>
-                <Card name = "Narset's Reversal" url="https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=460989&type=card"/>
-                <Card name = "Frantic Search" url="https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=456653&type=card"/>
-                <Card name = "Fiery Confluence" url="https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=446834&type=card"/>
-            </div>
-            </>,
+            <App/>,
             document.getElementById('root')
         );
 
